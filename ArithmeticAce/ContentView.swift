@@ -10,9 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     // MARK: Stored properties
-    let multiplicand = Int.random(in: 1...12)
-    let multiplier = Int.random(in: 1...12)
+    @State var multiplicand = Int.random(in: 1...12)
+    @State var multiplier = Int.random(in: 1...12)
     @State var inputGiven = ""
+    @State var newQuestion = false
     
     // Has an answer been checked?
     @State var answerChecked = false
@@ -47,11 +48,14 @@ struct ContentView: View {
                     .foregroundColor(.green)
                     //        CONDITION      true  false
                     .opacity(answerCorrect ? 1.0 : 0.0)
+                    .opacity(newQuestion ? 1.0 : 0.0)
                 Spacer()
                 TextField("",
                           text: $inputGiven)
                     .multilineTextAlignment(.trailing)
             }
+            
+            //Check Answer Button
             
             Button(action: {
                 
@@ -70,7 +74,7 @@ struct ContentView: View {
                     // Celebrate! 👍🏼
                     answerCorrect = true
                 } else {
-                    // Sadness, they gave a number, but it's correct 😭
+                    // Sadness, they gave a number, but it's not correct 😭
                     answerCorrect = false
                 }
             }, label: {
@@ -80,7 +84,25 @@ struct ContentView: View {
                 .padding()
                 .buttonStyle(.bordered)
             
-            Spacer()
+            //New Question Button
+            
+            Button(action: {
+                
+                // New Quesetion!
+                newQuestion = true
+
+               inputGiven = ""
+                
+                multiplicand = Int.random(in: 1...12)
+                multiplier = Int.random(in: 1...12)
+                
+                
+            }, label: {
+                Text("New Question")
+                    .font(.largeTitle)
+            })
+                .padding()
+                .buttonStyle(.bordered)
         }
         .padding(.horizontal)
         .font(.system(size: 72))
