@@ -10,8 +10,8 @@ import SwiftUI
 struct AdditionView: View {
     
     // MARK: Stored properties
-    @State var multiplicand = Int.random(in: 1...12)
-    @State var multiplier = Int.random(in: 1...12)
+    @State var addendOne = Int.random(in: 1...12)
+    @State var addendTwo = Int.random(in: 1...12)
     
     //This string contains whatever the user types in.
     @State var inputGiven = ""
@@ -25,20 +25,20 @@ struct AdditionView: View {
     // MARK: Computed properties
     // What is the correct product?
     var correctProduct: Int {
-        return multiplicand * multiplier
+        return addendOne + addendTwo
     }
     
     var body: some View {
         
         VStack(spacing: 0) {
             HStack {
-                Text("✕")
+                Text("﹢")
                 
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text("\(multiplicand)")
-                    Text("\(multiplier)")
+                    Text("\(addendOne)")
+                    Text("\(addendTwo)")
                 }
             }
             
@@ -111,8 +111,8 @@ struct AdditionView: View {
                     inputGiven = ""
                     
                     //New Question
-                    multiplicand = Int.random(in: 1...12)
-                    multiplier = Int.random(in: 1...12)
+                    addendOne = Int.random(in: 1...12)
+                    addendTwo = Int.random(in: 1...12)
                     
                     
                 }, label: {
